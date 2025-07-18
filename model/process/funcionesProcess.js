@@ -3,6 +3,8 @@
 
 const data_personal = require("../../../JSON/personal.json");
 const data_cv = require("../../../JSON/cv.json");
+const Connection = require("./connection")
+const FabricantesCRUD = require("../mysql/CRUD/fabricantesCRUD")
 
 class ProcessFunciones{
     
@@ -330,6 +332,39 @@ class ProcessFunciones{
             }
         })
     }//fin de funcion byscar personal
+
+    listarFabricantes(id){
+        return new Promise(async(resolve, reject) => {
+            const connection = new Connection()
+            let connexion = undefined
+
+            try{
+                connexion = await connection.connectMysql()
+                
+
+            }catch(error){
+                reject(error)
+            }
+
+            try {
+                console.log(id)
+                const fabricantesCrud = new FabricantesCRUD(connexion)
+                //let result = await fabricantesCrud.getFabricantes()
+                let result = await fabricantesCrud.getFabricantesById(id)
+                if(Object.keys(result).length == 0){
+                    reject("no se encontró nada")
+                }
+
+                resolve(result)
+            } catch (error) {
+                reject(error)
+            } finally{
+                connexion.end()
+                console.log("termina proceso")
+            }
+        })
+
+    }
 
 }
 module.exports = ProcessFunciones;

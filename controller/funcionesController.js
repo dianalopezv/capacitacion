@@ -44,6 +44,13 @@ class FuncionesController{
         console.log(resultadoProcess)
         return resultadoProcess
     }
+
+    listarFabricantes(id){
+        
+        const resultadoProcess= process.listarFabricantes(id)
+
+        return resultadoProcess
+    }
 }
 
 module.exports = FuncionesController

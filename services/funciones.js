@@ -94,6 +94,17 @@ funciones.post('/buscarPersonal', (request, response)=>{
     })
 })
 
+funciones.get('/listarFabricantes', (request, response)=>{
+    const id = request.headers.id
+    console.log(request.headers.id)
+    funcionesController.listarFabricantes(id)
+    .then((result)=>{
+        response.send(result)
+    }).catch((error)=>{
+        response.send(error)
+    })
+})
+
 
 
 module.exports = funciones
