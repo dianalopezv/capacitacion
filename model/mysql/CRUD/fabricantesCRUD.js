@@ -14,7 +14,7 @@ class FabricantesCRUD{
             })
         })
     }
-
+// comentario
     getFabricantesById(id){
         return new Promise((resolve, reject)=>{
             let consulta = `SELECT * FROM fabricante WHERE id = ?`;
